@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"image/color"
 	"log"
 )
 
@@ -11,15 +12,17 @@ const (
 )
 
 // Represents the game state
-type Game struct{}
+type Game struct {
+	framebuffer *ebiten.Image
+}
 
 func (g *Game) Update() error {
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-
-	return
+	g.framebuffer.Fill(color.RGBA{255, 0, 0, 255})
+	screen.DrawImage(g.framebuffer, nil)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (width, height int) {
@@ -33,7 +36,9 @@ func main() {
 	ebiten.SetWindowTitle("goebitentest")
 	ebiten.SetWindowResizable(false)
 
-	if err := ebiten.RunGame(&Game{}); err != nil {
+	game := &Game{framebuffer: ebiten.NewImage(screenWidth>>1, screenHeight>>1)}
+
+	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}
 }

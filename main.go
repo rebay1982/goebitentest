@@ -21,22 +21,26 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	g.framebuffer.Fill(color.RGBA{255, 0, 0, 255})
+	g.framebuffer.Fill(red)
 	screen.DrawImage(g.framebuffer, nil)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (width, height int) {
 
-	return outsideWidth >> 1, outsideHeight >> 1
+	return screenWidth, screenHeight
 }
+
+var red = color.RGBA{255, 0, 0, 255}
 
 func main() {
 
-	ebiten.SetWindowSize(screenWidth<<1, screenHeight<<1)
+	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("goebitentest")
 	ebiten.SetWindowResizable(false)
 
-	game := &Game{framebuffer: ebiten.NewImage(screenWidth>>1, screenHeight>>1)}
+	game := &Game{
+		framebuffer: ebiten.NewImage(screenWidth>>1, screenHeight>>1),
+	}
 
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)

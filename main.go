@@ -47,12 +47,12 @@ func (g *Game) PutPixel(x, y int, c color.Color) error {
 	}
 
 	pxlPos := y*(screenWidth<<2) + x<<2
-	R, G, B, A := c.RGBA()
+	R, G, B, _ := c.RGBA() // Ignore alpha channel.
 
 	g.framebuffer[pxlPos] = (byte)(R & 0xff)
 	g.framebuffer[pxlPos+1] = (byte)(G & 0xff)
 	g.framebuffer[pxlPos+2] = (byte)(B & 0xff)
-	g.framebuffer[pxlPos+3] = (byte)(A & 0xff)
+	g.framebuffer[pxlPos+3] = 0xff
 
 	return nil
 }

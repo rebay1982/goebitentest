@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"github.com/hajimehoshi/ebiten/v2"
+
 	"image/color"
 	"log"
 )
@@ -69,5 +70,20 @@ func main() {
 
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
+	}
+}
+
+func buildScene() {
+	origin := NewVector(0, 0, 0)
+	origin.X()
+
+	cwHalf := canvasWidth >> 1
+	chHalf := canvasHeight >> 1
+
+	for x := -cwHalf; x < cwHalf; x++ {
+		for y := -chHalf; y < chHalf; y++ {
+			D := CanvasToViewport(x, y)
+			D.X()
+		}
 	}
 }

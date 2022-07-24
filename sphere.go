@@ -11,24 +11,25 @@ type Sphere struct {
 	color  color.RGBA
 }
 
-func NewSphere(x, y, z, r float64) *Sphere {
+func NewSphere(x, y, z, r float64) Sphere {
 	return NewColoredSphere(x, y, z, r, color.RGBA{0xff, 0xff, 0xff, 0xff})
 }
 
-func NewColoredSphere(x, y, z, r float64, clr color.RGBA) *Sphere {
-	return &Sphere{
+func NewColoredSphere(x, y, z, r float64, clr color.RGBA) Sphere {
+	return Sphere{
 		center: *NewVector(x, y, z),
 		radius: r,
 		color:  clr,
 	}
 }
 
-func (s *Sphere) GetColor() color.RGBA {
+func (s Sphere) GetColor() color.RGBA {
 	return s.color
 }
 
-func (s *Sphere) IntersectSphere(O, D Vec) (t1, t2 float64) {
+func (s Sphere) IntersectSphere(O, D Vec) (t1, t2 float64) {
 
+	// See page 25.
 	t1 = math.MaxFloat64
 	t2 = math.MaxFloat64
 	r := s.radius

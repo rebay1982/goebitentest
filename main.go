@@ -16,6 +16,7 @@ const (
 // Represents the game state
 type Game struct {
 	framebuffer []byte
+	scene       []Sphere
 }
 
 func (g *Game) Update() error {
@@ -73,7 +74,7 @@ func main() {
 	}
 }
 
-func buildScene() {
+func drawScene() {
 	origin := NewVector(0, 0, 0)
 	origin.X()
 

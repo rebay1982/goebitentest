@@ -9,15 +9,15 @@ func NewVector(x, y, z float64) *Vec {
 }
 
 // Basic gettings.
-func (v *Vec) X() float64 {
+func (v Vec) X() float64 {
 	return v.e[0]
 }
 
-func (v *Vec) Y() float64 {
+func (v Vec) Y() float64 {
 	return v.e[1]
 }
 
-func (v *Vec) Z() float64 {
+func (v Vec) Z() float64 {
 	return v.e[2]
 }
 
